@@ -1,0 +1,68 @@
+{
+  "name": "lobechat-mcp-plugin",
+  "version": "1.0.0",
+  "description": "Lobe Chat plugin compatible with Model Context Protocol servers",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "lobechat-mcp-plugin": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "docker-entrypoint.sh"
+  ],
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "nodemon",
+    "build": "tsc",
+    "cli": "node dist/cli.js",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DBFritz/lobechat-mcp-plugin.git"
+  },
+  "keywords": [
+    "lobe-chat",
+    "plugin",
+    "mcp",
+    "model-context-protocol",
+    "express",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DBFritz/lobechat-mcp-plugin/issues"
+  },
+  "homepage": "https://github.com/DBFritz/lobechat-mcp-plugin#readme",
+  "dependencies": {
+    "@lobehub/chat-plugins-gateway": "^1.9.0",
+    "@modelcontextprotocol/sdk": "^1.8.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.24.0",
+    "@lobehub/chat-plugin-sdk": "^1.32.4",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.14.0",
+    "@typescript-eslint/eslint-plugin": "^8.29.0",
+    "@typescript-eslint/parser": "^8.29.0",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.6",
+    "globals": "^16.0.0",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.5.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  }
+}

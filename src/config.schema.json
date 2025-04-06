@@ -1,0 +1,174 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LobeChat MCP Plugin Configuration",
+  "type": "object",
+  "properties": {
+    "upstream": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri",
+        "description": "The upstream URL for chat plugins"
+      },
+      "description": "The upstream URL for chat plugins"
+    },
+    "servers": {
+      "type": "object",
+      "description": "Collection of MCP server configurations",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "author",
+          "createdAt",
+          "meta",
+          "type"
+        ],
+        "properties": {
+          "author": {
+            "type": "string",
+            "description": "Author of the MCP server"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date",
+            "description": "Creation date of the MCP server"
+          },
+          "homepage": {
+            "type": "string",
+            "format": "uri",
+            "description": "Homepage URL for the MCP server"
+          },
+          "systemRole": {
+            "type": "string",
+            "description": "System role for the MCP server"
+          },
+          "settings": {
+            "$ref": "http://json-schema.org/draft-07/schema#"
+          },
+          "meta": {
+            "type": "object",
+            "required": [
+              "title",
+              "description",
+              "category"
+            ],
+            "properties": {
+              "avatar": {
+                "type": "string",
+                "description": "Avatar or icon for the MCP server"
+              },
+              "title": {
+                "type": "string",
+                "description": "Title of the MCP server"
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the MCP server functionality"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Tags describing the MCP server"
+              },
+              "category": {
+                "type": "string",
+                "description": "Category of the MCP server",
+                "enum": [
+                  "gaming-entertainment",
+                  "lifestyle",
+                  "media-generate",
+                  "science-education",
+                  "social",
+                  "stocks-finance",
+                  "tools",
+                  "web-search"
+                ]
+              }
+            }
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of MCP server",
+            "enum": [
+              "mcp:command",
+              "mcp:sse",
+              "openapi"
+            ]
+          }
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "mcp:command"
+                ]
+              },
+              "command": {
+                "type": "string",
+                "description": "The command to execute the MCP server"
+              },
+              "args": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Command arguments for the MCP server"
+              },
+              "env": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "description": "Environment variables for the MCP server"
+              },
+              "cwd": {
+                "type": "string",
+                "description": "Working directory for the MCP server"
+              }
+            },
+            "required": [
+              "command"
+            ]
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "mcp:sse"
+                ]
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL for the SSE-based MCP server"
+              }
+            },
+            "required": [
+              "url"
+            ]
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "openapi"
+                ]
+              },
+              "openapi": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL for the OpenAPI-based service"
+              }
+            },
+            "required": [
+              "openapi"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

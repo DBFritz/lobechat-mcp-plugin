@@ -1,0 +1,112 @@
+{
+    "$schema": "https://raw.githubusercontent.com/DBFritz/lobechat-mcp-plugin/refs/heads/main/src/config.schema.json",
+    "upstream": ["https://chat-plugins.lobehub.com"],
+    "publicUrl": "https://chat-plugins.example.com",
+    "servers": {
+        "example": {
+            "type": "mcp:sse",
+            "url": "http://localhost:8080/v1",
+            "options": {
+                "eventSourceInit": {}
+            },
+            "author": "Your Name",
+            "createdAt": "2023-01-01",
+            "homepage": "https://github.com/username/your-project",
+            "meta": {
+                "avatar": "https://example.com/avatar.png",
+                "title": "Example MCP Plugin",
+                "description": "An example MCP plugin for LobeChat",
+                "tags": ["example", "mcp"],
+                "category": "tools"
+            },
+            "meta:es-ES": {
+                "title": "Ejemplo de plugin MCP",
+                "description": "Un ejemplo de plugin MCP para LobeChat"
+            },
+            "meta:fr-FR": {
+                "title": "Exemple de plugin MCP",
+                "description": "Un exemple de plugin MCP pour LobeChat"
+            }
+        },
+        "dice": {
+            "type": "mcp:command",
+            "command": "uvx",
+            "args": [
+                "mcp-dice"
+            ],
+            "author": "yamaton",
+            "createdAt": "2025-04-06",
+            "homepage": "https://github.com/yamaton/mcp-dice",
+            "meta": {
+                "avatar": "🎲",
+                "title": "MCP Dice",
+                "description": "A simple MCP server that rolls a dice",
+                "tags": [
+                    "mcp",
+                    "dice"
+                ],
+                "category": "gaming-entertainment"
+            },
+            "meta:es-ES": {
+                "title": "MCP Dado",
+                "description": "Un servidor MCP simple que lanza un dado"
+            }
+        },
+        "assistant": {
+            "type": "mcp:sse",
+            "author": "Nabu Casa",
+            "createdAt": "2025-04-03",
+            "homepage": "https://www.home-assistant.io/integrations/mcp_server/",
+            "systemRole": "You are a helpful assistant that interacts with a home assistant instance.",
+            "settings": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string",
+                        "description": "The token for the home assistant instance"
+                    }
+                }
+            },
+            "meta": {
+                "avatar": "🤖",
+                "title": "Home Assistant",
+                "description": "Control your home assistant instance",
+                "tags": ["home-assistant", "mcp", "assistant"],
+                "category": "lifestyle"
+            },
+            "url": "http://hass.local/mcp_server/sse",
+            "onConnectSettings": {
+                "//": "Provide a valid token to be able to connect and get the available tools if needed",
+                "token": "{{env.HOME_ASSISTANT_TOKEN}}"
+            },
+            "options": {
+                "eventSourceInit": {
+                    "//": "Config to be used when connecting to the SSE endpoint",
+                    "headers": {
+                        "Authorization": "Bearer {{token}}"
+                    }
+                },
+                "requestInit": {
+                    "//": "Config to be used when making a subsequent request to the MCP server",
+                    "headers": {
+                        "Authorization": "Bearer {{token}}"
+                    }
+                }
+            }
+        },
+        "apiguru": {
+            "type": "openapi",
+            "author": "DBFritz",
+            "createdAt": "2025-04-03",
+            "homepage": "https://apis.guru/",
+            "openapi": "https://api.apis.guru/v2/openapi.yaml",
+            "meta": {
+                "avatar": "🌐",
+                "title": "API Guru",
+                "description": "API Guru",
+                "tags": ["api", "guru", "openapi"],
+                "category": "web-search"
+            }
+        }
+    }
+}
