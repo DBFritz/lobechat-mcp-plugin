@@ -8,7 +8,7 @@ export async function toolRoute(req: Request, res: Response) {
   try {
     const settings = JSON.parse((req.headers['x-lobe-plugin-settings'] as string) ?? '{}');
     const { identifier, name } = req.params;
-    const config = await getConfig(identifier, {
+    const config = getConfig(identifier, {
       env: process.env,
       ...settings,
     });

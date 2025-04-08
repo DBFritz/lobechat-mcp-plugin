@@ -8,9 +8,9 @@ manifestRoute.route = '/:identifier/manifest.json' as const;
 
 export async function manifestRoute(req: Request, res: Response) {
   const { identifier } = req.params;
-  const { onConnectSettings = {} } = await getConfig(identifier, { env: process.env });
-  const config = await getConfig(identifier, { env: process.env, ...onConnectSettings });
-  const { publicUrl } = await getConfig();
+  const { onConnectSettings = {} } = getConfig(identifier, { env: process.env });
+  const config = getConfig(identifier, { env: process.env, ...onConnectSettings });
+  const { publicUrl } = getConfig();
 
   const origin = `${req.protocol}://${req.headers.host}`;
 

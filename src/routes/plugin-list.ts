@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 pluginListRoute.route = /^\/(index.*\.json)?$/;
 
 export async function pluginListRoute(req: Request, res: Response) {
-  const config = await getConfig();
+  const config = getConfig();
   const lang = req.url?.match(/index\.(.+)\.json/)?.[1];
 
   const baseUrl = config.publicUrl ?? `${req.protocol}://${req.headers.host}`;

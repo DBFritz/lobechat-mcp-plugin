@@ -15,9 +15,9 @@ watchFile(configPath, async () => {
   configFileContent = await readFile(configPath, 'utf8');
 });
 
-export async function getConfig(settings?: Record<string, unknown>): Promise<IConfig>;
-export async function getConfig(key: string, settings?: Record<string, unknown>): Promise<IServer>;
-export async function getConfig(
+export function getConfig(settings?: Record<string, unknown>): IConfig;
+export function getConfig(key: string, settings?: Record<string, unknown>): IServer;
+export function getConfig(
   keyOrSettings: string | Record<string, unknown> = {},
   _settings: Record<string, unknown> = {}
 ) {
