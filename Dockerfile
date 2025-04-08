@@ -1,4 +1,4 @@
-FROM node:20-alpine AS builder
+FROM node:20-slim AS builder
 
 # Create app directory
 WORKDIR /app
@@ -16,10 +16,13 @@ COPY . .
 RUN npm run build
 
 # Second stage: runtime
-FROM node:20-alpine
+FROM node:20-slim
 
 # Install base packages for MCP servers requiring uvx
-RUN apk add --no-cache python3 py3-uv make g++
+RUN apt-get update && apt-get install -y python3 make g++ wget && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install uv
+RUN wget -qO- https://astral.sh/uv/install.sh | env UV_UNMANAGED_INSTALL="/usr/local/bin" sh
 
 # Create app directory
 WORKDIR /app
