@@ -29,17 +29,11 @@ export async function toolRoute(req: Request, res: Response) {
 
     if ('content' in result && Array.isArray(result.content)) {
       if (result.content.length !== 1) {
-        return res.status(204).json(result.content);
+        return res.status(200).json(result.content);
       }
       const content = result.content[0];
       if ('type' in content && content.type === 'text') {
-        try {
-          return res.status(200).json(JSON.parse(content.text));
-        } catch (_err) {
-          // eslint-disable-next-line no-console
-          console.error(_err);
-          return res.status(200).end(content.text);
-        }
+        return res.status(200).end(content.text);
       }
     }
 
