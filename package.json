@@ -1,6 +1,6 @@
 {
   "name": "lobechat-mcp-plugin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Lobe Chat plugin compatible with Model Context Protocol servers",
   "type": "module",
   "main": "dist/index.js",
