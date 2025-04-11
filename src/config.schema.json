@@ -42,8 +42,17 @@
             "type": "string",
             "description": "System role for the MCP server"
           },
+          "gateway": {
+            "type": "boolean",
+            "description": "Whether to use the local gateway or the one provided by the instance",
+            "default": true
+          },
           "settings": {
             "$ref": "http://json-schema.org/draft-07/schema#"
+          },
+          "onConnectSettings": {
+            "description": "Settings to be used when connecting to the server, must follow the schema defined in settings",
+            "type": "object"
           },
           "meta": {
             "type": "object",

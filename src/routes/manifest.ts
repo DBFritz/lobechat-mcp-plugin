@@ -10,9 +10,7 @@ export async function manifestRoute(req: Request, res: Response) {
   const { identifier } = req.params;
   const { onConnectSettings = {} } = getConfig(identifier, { env: process.env });
   const config = getConfig(identifier, { env: process.env, ...onConnectSettings });
-  const { publicUrl } = getConfig();
-
-  const origin = `${req.protocol}://${req.headers.host}`;
+  const serverUrl = getConfig().publicUrl ?? `${req.protocol}://${req.headers.host}`;
 
   const { tools } = await withClient(config, async (c) => c?.listTools() || { tools: [] });
 
@@ -20,19 +18,18 @@ export async function manifestRoute(req: Request, res: Response) {
     const langCode = lang.split(';')[0].trim();
     config.meta = { ...config.meta, ...(config[`meta:${langCode}`] ?? {}) };
   }
-  const { author, createdAt, homepage, systemRole, settings, meta } = config;
+  const { author, createdAt, homepage, systemRole, settings, meta, gateway = true } = config;
 
   const api = tools.map((tool) => ({
     name: tool.name,
     description: tool.description ?? '',
     parameters: tool.inputSchema as PluginSchema,
-    url: `http://127.0.0.1:${port}/${identifier}/${tool.name}`,
+    url: `${gateway ? `http://127.0.0.1:${port}/` : `${serverUrl}`}/${identifier}/${tool.name}`,
   }));
-  const gateway = `${publicUrl ?? origin}/gateway`;
 
   const result = {
     api,
-    gateway,
+    gateway: gateway ? `${serverUrl}/gateway` : undefined,
     identifier,
     meta,
     author,

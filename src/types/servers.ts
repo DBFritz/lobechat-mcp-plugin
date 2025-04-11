@@ -16,6 +16,7 @@ interface ServerBase {
   settings?: PluginSchema;
   onConnectSettings?: Record<string, unknown>;
   meta: Meta;
+  gateway?: boolean;
   [localeMeta: `meta:${string}`]: Partial<Meta>;
 }
 
