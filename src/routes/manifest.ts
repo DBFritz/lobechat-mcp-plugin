@@ -24,7 +24,7 @@ export async function manifestRoute(req: Request, res: Response) {
     name: tool.name,
     description: tool.description ?? '',
     parameters: tool.inputSchema as PluginSchema,
-    url: `${gateway ? `http://127.0.0.1:${port}/` : `${serverUrl}`}/${identifier}/${tool.name}`,
+    url: `${gateway ? `http://127.0.0.1:${port}` : `${serverUrl}`}/${identifier}/${tool.name}`,
   }));
 
   const result = {
